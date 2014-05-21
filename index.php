@@ -6,6 +6,8 @@ $app = new \Slim\Slim(array(
     'templates.path' => 'views'
 ));
 
+$app->setName('KickAss');
+
 $app->view()->parserExtensions = array(
     new \Slim\Views\TwigExtension(),
 );
