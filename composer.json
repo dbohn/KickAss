@@ -1,0 +1,25 @@
+{
+    "name": "boreikei/kick-ass",
+    "description": "DBS-Projekt SoSe 2014 FU Berlin",
+    "require": {
+        "slim/slim": "*",
+        "slim/views": "*",
+        "slim/middleware": "*",
+        "twig/twig": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Bohn",
+            "email": "david.bohn@fu-berlin.de"
+        },
+        {
+            "name": "Fabian Reimeier",
+            "email": "f.reimer@fu-berlin.de"
+        },
+        {
+            "name": "Luca Keidel",
+            "email": "luca.keidel@fu-berlin.de"
+        }
+    ]
+}
