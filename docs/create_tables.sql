@@ -1,4 +1,4 @@
-CREATE TYPE turnuesse AS ENUM ('Sommer', 'Winter');
+﻿CREATE TYPE turnuesse AS ENUM ('Sommer', 'Winter');
 
 CREATE TABLE Liga (
     id INTEGER NOT NULL,
@@ -6,6 +6,25 @@ CREATE TABLE Liga (
 
     PRIMARY KEY(id)
 );
+
+CREATE TABLE Saison (
+    id INTEGER NOT NULL,
+    turnus TURNUESSE,
+    start_datum DATE,
+    end_datum DATE,
+
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE Verein (
+    id INTEGER NOT NULL,
+    name VARCHAR(50),
+    heimatstadion VARCHAR(100),
+    ort VARCHAR(30),
+
+    PRIMARY KEY(id)
+);
+
 
 CREATE TABLE Spiel (
     id INTEGER NOT NULL,
@@ -33,23 +52,6 @@ CREATE TABLE Spieler (
     PRIMARY KEY(id)
 );
 
-CREATE TABLE Saison (
-    id INTEGER NOT NULL,
-    turnus TURNUESSE,
-    start_datum DATE,
-    end_datum DATE,
-
-    PRIMARY KEY(id)
-);
-
-CREATE TABLE Verein (
-    id INTEGER NOT NULL,
-    name VARCHAR(50),
-    heimatstadion VARCHAR(100),
-    ort VARCHAR(30),
-
-    PRIMARY KEY(id)
-);
 
 CREATE TABLE Team (
     id INTEGER NOT NULL,
@@ -77,7 +79,7 @@ CREATE TABLE spielt_bei (
 
     PRIMARY KEY(team_id, spieler_id, trikotnr),
     FOREIGN KEY (team_id) REFERENCES Team(id),
-    FOREIGN KEY (spieler_id) REFERENCES Spieler(id),
+    FOREIGN KEY (spieler_id) REFERENCES Spieler(id)
 );
 
 CREATE TABLE erzielt_tor (
