@@ -58,18 +58,12 @@ CREATE TABLE Team (
     name VARCHAR(30),
     verein_id INTEGER NOT NULL,
     saison_id INTEGER NOT NULL,
+    liga_id INTEGER NOT NULL,
 
     PRIMARY KEY(id),
     FOREIGN KEY (verein_id) REFERENCES Verein(id),
-    FOREIGN KEY (saison_id) REFERENCES Saison(id)
-);
-
-CREATE TABLE spielt_in (
-    liga_id INTEGER NOT NULL,
-    team_id INTEGER NOT NULL,
-
-    FOREIGN KEY (liga_id) REFERENCES Liga(id),
-    FOREIGN KEY (team_id) REFERENCES Team(id)
+    FOREIGN KEY (saison_id) REFERENCES Saison(id),
+    FOREIGN KEY (liga_id) REFERENCES Liga(id)
 );
 
 CREATE TABLE spielt_bei (

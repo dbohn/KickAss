@@ -7,30 +7,38 @@ Entgegen der üblichen Notation mussten wir hier auf das Kennzeichnen der Schlü
 ##Vollständig
 
 ###Entitäten
-* Verein: {[**id**, name]}
-* Spieler: {[**id**, vorname, name, heimatland, trikotnr]}
-* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, saison]}
+* Verein: {[**id**, name, ort, heimatstadion]}
+* Team: {[**id**]}
+* Spieler: {[**id**, vorname, name, heimatland]}
+* Spiel: {[**id**, anpfiff_datum, ort, spieldauer]}
 * Liga: {[**id**, name]}
+* Saison: {[**id**, start_datum, end_datum, turnus]}
 
 ###Relationen
 
-* spielt-in: {[***id_verein***, *id_liga*, saison]}
-* spielt-bei: {[***id_spieler***, *id_verein*, saison]}
+* spielt-in: {[***id_team***, ***id_liga***]}
+* spielt-bei: {[***id_team***, ***id_spieler***, **trikotnummer**]}
 * erzielt-Tor {[***id_spieler***, ***id_spiel***, **Spielminute**]}
 * ist Gast: {[***id_spiel***, *id_verein*]}
 * ist Gastgeber: {[***id_spiel***, *id_verein*]}
 * gehört zu: {[***spiel_id***, *id_liga*]}
+* spielt-fuer: {[***id_team***, *id_verein*]}
+* findet-statt: {[***id_spiel***, *id_saison*]}
+* spielt-waehrend: {[***id_team***, *id_saison*]}
 
 ##Vereinfacht
 
 In dem vereinfachten Modell wurden bereits einige der vereinfachten Beziehungen umbenannt.
 
 ###Entitäten
-* Verein: {[**id**, name, *id_liga*, saison]}
-* Spieler: {[**id**, vorname, name, heimatland, trikotnr, *spielt_bei*, saison]}
-* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, saison, *gast*, *gastgeber*, *liga*]}
+* Verein: {[**id**, name, ort, heimatstadion]}
+* Team: {[**id**, *verein*, *saison*, *liga*]}
+* Spieler: {[**id**, vorname, name, heimatland]}
+* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, *gast*, *gastgeber*, *liga*, *saison*]}
 * Liga: {[**id**, name]}
+* Saison: {[**id**, start_datum, end_datum, turnus]}
 
 ###Relationen
 
-* gehört zu: {[***spiel_id***, *id_liga*]}
+* spielt-bei: {[***id_team***, ***id_spieler***, **trikotnummer**]}
+* erzielt-Tor {[***id_spieler***, ***id_spiel***, **Spielminute**]}
