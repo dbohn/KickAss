@@ -1,0 +1,17 @@
+{
+  "name": "KickAss",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dbohn/KickAss",
+  "authors": [
+    "David Bohn <david.bohn@fu-berlin.de>",
+    "Luca Keidel <luca.keidel@fu-berlin.de>",
+    "Fabian Reimeier <f.reimeier@fu-berlin.de>"
+  ],
+  "description": "DBS-Projekt SoSe 2014 FU Berlin",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "latest",
+    "jquery": "latest",
+    "fontawesome": "latest"
+  }
+}

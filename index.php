@@ -17,3 +17,4 @@ $app->get('/', function () use ($app) {
     $app->render('index.twig');
 });
 $app->run();
+?>
