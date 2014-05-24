@@ -1,12 +1,14 @@
 $(function(){
+
   $('#sidebar').affix({
       offset: {
-        top: 201 - 10
+        top: 191
       }
     });
 
-  hljs.initHighlightingOnLoad();
-
   $('body').scrollspy({ target: '#leftCol' });
+
+  // init highlight.js
+  hljs.initHighlightingOnLoad();
 
 });
