@@ -36,7 +36,7 @@ gulp.task('build', ['less'], function() {});
 
 gulp.task('default', ['build'], function() {
 
-    gulp.watch('src/less/*.less', ['less']);
+    gulp.watch('less/*.less', ['less']);
 
     //gulp.watch('src/js/**/*.js', ['js']);
 });
