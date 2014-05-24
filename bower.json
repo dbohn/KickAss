@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap": "latest",
     "jquery": "latest",
-    "fontawesome": "latest"
+    "fontawesome": "latest",
+    "highlightjs": "latest"
   }
 }

@@ -1,8 +1,17 @@
+@import "/bower_components/bootstrap/less/bootstrap.less";
+
 @header-bg: #EFF46D;
 @body-bg: #fbfbfb;
 @font-size-header: 60px;
 @header-text-shadow: 3px;
 @font-color-header: #fff;
+
+@input-border-focus: darken(@header-bg, 30%);
+
+// Overrides
+@brand-primary: @header-bg;
+@btn-primary-color: darken(@header-bg, 30%);
+@btn-primary-border: darken(@header-bg, 15%);
 
 body{
   background-color: @body-bg;
@@ -56,7 +65,7 @@ body{
   background-color: lighten(@body-bg, 5%);
   border:1px solid @header-bg;
   box-shadow: 1px 0px 3px lighten(@header-bg, 10%);
-  padding:5px;
+  padding:5px 10px 5px 10px;
   margin-bottom:50px;
 }
 
@@ -87,9 +96,14 @@ body{
   border-left: 3px solid #c0c0c0;
   font-size:20px;
 
-  li a{
-    background-color:transparent;
-    color: #c0c0c0;
+  li{
+
+    margin-top: 0px !important;
+
+    a{
+      background-color:transparent;
+      color: #c0c0c0;
+    }
   }
 
 
@@ -107,4 +121,19 @@ body{
 .affix{
   position:fixed;
   top:10px;
+}
+
+label{
+  font-weight:normal;
+}
+
+.hljs{
+  background-color:transparent !important;
+  padding: 0px;
+  margin: 0px;
+}
+
+.result{
+  color: darken(@header-bg, 15%);
+  font-weight:bold;
 }
