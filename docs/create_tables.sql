@@ -1,6 +1,4 @@
-﻿CREATE TYPE turnuesse AS ENUM ('Sommer', 'Winter');
-
-CREATE TABLE Liga (
+﻿CREATE TABLE Liga (
     id INTEGER NOT NULL,
     name VARCHAR(20) NOT NULL,
 
@@ -9,7 +7,7 @@ CREATE TABLE Liga (
 
 CREATE TABLE Saison (
     id INTEGER NOT NULL,
-    turnus TURNUESSE,
+    name VARCHAR(30),
     start_datum DATE,
     end_datum DATE,
 
