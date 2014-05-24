@@ -1,0 +1,23 @@
+Install for development
+=======================
+
+1. Ensure that you have installed:
+* Composer (we assume a global install)
+* Node.js with npm
+* Bower
+* Gulp (install with npm install -g gulp)
+
+2. Run the following commands:
+a. composer install
+b. npm install
+c. bower install
+
+Now you can build the assets once by running:
+```
+gulp build
+```
+
+If you want to track changes to source files and recompile the assets automagically on save run:
+```
+gulp
+```
