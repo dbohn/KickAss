@@ -12,7 +12,7 @@ Entgegen der üblichen Notation mussten wir hier auf das Kennzeichnen der Schlü
 * Spieler: {[**id**, vorname, name, heimatland]}
 * Spiel: {[**id**, anpfiff_datum, ort, spieldauer]}
 * Liga: {[**id**, name]}
-* Saison: {[**id**, start_datum, end_datum, turnus]}
+* Saison: {[**id**, start_datum, end_datum, name]}
 
 ###Relationen
 
