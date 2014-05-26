@@ -7,7 +7,6 @@
 
 CREATE TABLE Saison (
     id INTEGER NOT NULL,
-    name VARCHAR(30),
     start_datum DATE,
     end_datum DATE,
 
@@ -78,6 +77,7 @@ CREATE TABLE erzielt_tor (
     spieler_id INTEGER NOT NULL,
     spiel_id INTEGER NOT NULL,
     spielminute INTEGER NOT NULL,
+    eigentor BOOLEAN NOT NULL,
 
     PRIMARY KEY(spieler_id, spiel_id, spielminute),
     FOREIGN KEY(spieler_id) REFERENCES Spieler(id),
