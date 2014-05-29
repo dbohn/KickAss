@@ -12,7 +12,7 @@ Entgegen der üblichen Notation mussten wir hier auf das Kennzeichnen der Schlü
 * Spieler: {[**id**, vorname, name, heimatland]}
 * Spiel: {[**id**, anpfiff_datum, ort, spieldauer]}
 * Liga: {[**id**, name]}
-* Saison: {[**id**, start_datum, end_datum, name]}
+* Saison: {[**id**, start_datum, end_datum]}
 
 ###Relationen
 
@@ -36,7 +36,7 @@ In dem vereinfachten Modell wurden bereits einige der vereinfachten Beziehungen 
 * Spieler: {[**id**, vorname, name, heimatland]}
 * Spiel: {[**id**, anpfiff_datum, ort, spieldauer, *gast*, *gastgeber*, *liga*, *saison*]}
 * Liga: {[**id**, name]}
-* Saison: {[**id**, start_datum, end_datum, turnus]}
+* Saison: {[**id**, start_datum, end_datum]}
 
 ###Relationen
 
