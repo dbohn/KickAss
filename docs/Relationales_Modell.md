@@ -23,7 +23,7 @@ Entgegen der üblichen Notation mussten wir hier auf das Kennzeichnen der Schlü
 * ist Gastgeber: {[***id_spiel***, *id_verein*]}
 * gehört zu: {[***spiel_id***, *id_liga*]}
 * spielt-fuer: {[***id_team***, *id_verein*]}
-* findet-statt: {[***id_spiel***, *id_saison*]}
+* findet-statt: {[***id_spiel***, *id_saison*, spieltag]}
 * spielt-waehrend: {[***id_team***, *id_saison*]}
 
 ##Vereinfacht
@@ -34,7 +34,7 @@ In dem vereinfachten Modell wurden bereits einige der vereinfachten Beziehungen 
 * Verein: {[**id**, name, ort, heimatstadion]}
 * Team: {[**id**, *verein*, *saison*, *liga*]}
 * Spieler: {[**id**, vorname, name, heimatland]}
-* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, *gast*, *gastgeber*, *liga*, *saison*]}
+* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, *gast*, *gastgeber*, *liga*, *saison*, spieltag]}
 * Liga: {[**id**, name]}
 * Saison: {[**id**, start_datum, end_datum]}
 

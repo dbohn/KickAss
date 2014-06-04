@@ -32,6 +32,7 @@ CREATE TABLE Spiel (
     liga_id INTEGER NOT NULL,
     gast_id INTEGER NOT NULL,
     gastgeber_id INTEGER NOT NULL,
+    spieltag INTEGER NOT NULL,
 
     PRIMARY KEY(id),
     FOREIGN KEY(saison_id) REFERENCES Saison(id),
