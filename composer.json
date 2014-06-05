@@ -5,7 +5,8 @@
         "slim/slim": "*",
         "slim/views": "*",
         "slim/middleware": "*",
-        "twig/twig": "*"
+        "twig/twig": "*",
+        "league/csv": "*"
     },
     "license": "MIT",
     "authors": [
@@ -15,7 +16,7 @@
         },
         {
             "name": "Fabian Reimeier",
-            "email": "f.reimer@fu-berlin.de"
+            "email": "f.reimeier@fu-berlin.de"
         },
         {
             "name": "Luca Keidel",

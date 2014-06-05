@@ -1,4 +1,4 @@
-﻿CREATE TABLE Liga (
+CREATE TABLE Liga (
     id INTEGER NOT NULL,
     name VARCHAR(20) NOT NULL,
 
@@ -6,11 +6,9 @@
 );
 
 CREATE TABLE Saison (
-    id INTEGER NOT NULL,
+    id SERIAL PRIMARY KEY,
     start_datum DATE,
-    end_datum DATE,
-
-    PRIMARY KEY(id)
+    end_datum DATE
 );
 
 CREATE TABLE Verein (
@@ -33,6 +31,8 @@ CREATE TABLE Spiel (
     gast_id INTEGER NOT NULL,
     gastgeber_id INTEGER NOT NULL,
     spieltag INTEGER NOT NULL,
+    toreHeim INTEGER NOT NULL,
+    toreGast INTEGER NOT NULL,
 
     PRIMARY KEY(id),
     FOREIGN KEY(saison_id) REFERENCES Saison(id),
@@ -43,8 +43,7 @@ CREATE TABLE Spiel (
 
 CREATE TABLE Spieler (
     id INTEGER NOT NULL,
-    vorname VARCHAR(30),
-    name VARCHAR(30),
+    name VARCHAR(120),
     heimatland VARCHAR(30),
 
     PRIMARY KEY(id)
@@ -74,13 +73,12 @@ CREATE TABLE spielt_bei (
     FOREIGN KEY (spieler_id) REFERENCES Spieler(id)
 );
 
-CREATE TABLE erzielt_tor (
+CREATE TABLE erzielt_tore (
     spieler_id INTEGER NOT NULL,
-    spiel_id INTEGER NOT NULL,
-    spielminute INTEGER NOT NULL,
-    eigentor BOOLEAN NOT NULL,
+    saison_id INTEGER NOT NULL,
+    anzahl INTEGER NOT NULL,
 
-    PRIMARY KEY(spieler_id, spiel_id, spielminute),
+    PRIMARY KEY(spieler_id, saison_id),
     FOREIGN KEY(spieler_id) REFERENCES Spieler(id),
-    FOREIGN KEY(spiel_id) REFERENCES Spiel(id)
+    FOREIGN KEY(saison_id) REFERENCES Saison(id)
 );
