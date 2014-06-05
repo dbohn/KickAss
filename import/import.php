@@ -12,8 +12,8 @@ class Import{
    * Config
    */
   private $db_host = 'localhost';
-  private $db_user = 'dbs';
-  private $db_password = 'agnes';
+  private $db_user = '';
+  private $db_password = '';
   private $db_name = 'bundesliga';
 
   private $add = array(
@@ -30,6 +30,10 @@ class Import{
 
 
   public function __construct($path_liga, $path_spiel, $path_spieler, $path_verein){
+
+  	if($this -> db_user == '' || $this -> db_password == ''){
+  		$this -> genericError('Please edit this file and specify a database user and password!');
+  	}
 
     $this -> path_liga = $path_liga;
     if(!file_exists($this -> path_liga)){
