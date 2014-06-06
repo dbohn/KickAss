@@ -41,4 +41,4 @@ In dem vereinfachten Modell wurden bereits einige der vereinfachten Beziehungen 
 ###Relationen
 
 * spielt-bei: {[***id_team***, ***id_spieler***, **trikotnummer**]}
-* erzielt-Tor {[***id_spieler***, ***id_saison***, anzahl]}
+* erzielt-Tore {[***id_spieler***, ***id_saison***, anzahl]}
