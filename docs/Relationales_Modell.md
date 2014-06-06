@@ -10,7 +10,7 @@ Entgegen der üblichen Notation mussten wir hier auf das Kennzeichnen der Schlü
 * Verein: {[**id**, name, ort, heimatstadion]}
 * Team: {[**id**]}
 * Spieler: {[**id**, vorname, name, heimatland]}
-* Spiel: {[**id**, anpfiff_datum, ort, spieldauer]}
+* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, toreGast, toreHeim]}
 * Liga: {[**id**, name]}
 * Saison: {[**id**, start_datum, end_datum]}
 
@@ -18,7 +18,7 @@ Entgegen der üblichen Notation mussten wir hier auf das Kennzeichnen der Schlü
 
 * spielt-in: {[***id_team***, ***id_liga***]}
 * spielt-bei: {[***id_team***, ***id_spieler***, **trikotnummer**]}
-* erzielt-Tor {[***id_spieler***, ***id_spiel***, **Spielminute**]}
+* erzielt-Tor {[***id_spieler***, ***id_saison***, anzahl]}
 * ist Gast: {[***id_spiel***, *id_verein*]}
 * ist Gastgeber: {[***id_spiel***, *id_verein*]}
 * gehört zu: {[***spiel_id***, *id_liga*]}
@@ -34,11 +34,11 @@ In dem vereinfachten Modell wurden bereits einige der vereinfachten Beziehungen 
 * Verein: {[**id**, name, ort, heimatstadion]}
 * Team: {[**id**, *verein*, *saison*, *liga*]}
 * Spieler: {[**id**, vorname, name, heimatland]}
-* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, *gast*, *gastgeber*, *liga*, *saison*, spieltag]}
+* Spiel: {[**id**, anpfiff_datum, ort, spieldauer, toreGast, toreHeim, *gast*, *gastgeber*, *liga*, *saison*, spieltag]}
 * Liga: {[**id**, name]}
 * Saison: {[**id**, start_datum, end_datum]}
 
 ###Relationen
 
 * spielt-bei: {[***id_team***, ***id_spieler***, **trikotnummer**]}
-* erzielt-Tor {[***id_spieler***, ***id_spiel***, **Spielminute**]}
+* erzielt-Tor {[***id_spieler***, ***id_saison***, anzahl]}
