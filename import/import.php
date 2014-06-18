@@ -6,15 +6,17 @@ require '../vendor/autoload.php';
 
 use League\Csv\Reader;
 
+use API\Config;
+
 class Import{
 
   /**
    * Config
    */
-  private $db_host = 'localhost';
+  private $db_host = '';
   private $db_user = '';
   private $db_password = '';
-  private $db_name = 'bundesliga';
+  private $db_name = '';
 
   private $add = array(
     array(                            // Saison für die 1. Liga
@@ -40,6 +42,10 @@ class Import{
 
 
   public function __construct($path_liga, $path_spiel, $path_spieler, $path_verein){
+    $this->db_host = Config::$db_host;
+    $this->db_user = Config::$db_user;
+    $this->db_password = Config::$db_pass;
+    $this->db_name = Config::$db_name;
 
   	if($this -> db_user == '' || $this -> db_password == ''){
   		$this -> genericError('Please edit this file and specify a database user and password!');
