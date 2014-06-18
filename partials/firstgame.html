@@ -1,0 +1,21 @@
+<!-- begin box -->
+<h2 class="hl-box" id="fgame">
+  <i class="fa fa-chevron-right left"></i>
+  Das erste Spiel der Saison
+  <i class="fa fa-chevron-left right"></i>
+</h2>
+<div class="box-lg">
+  <h3>An welchem Tag fand das erste Spiel der Saison statt?</h3>
+  <form class="form-inline" role="form">
+    <label class="control-label" for="saison">Bitte eine Saison auswählen: </label>
+    <select class="form-control" id="saison" ng-change="selectedSeason()" ng-model="season" ng-options="el.name for el in seasons">
+      <option value="">Bitte Saison wählen!</option>
+    </select>
+    <button class="btn btn-primary" type="submit">Ausführen</button>
+  </form>
+  <h3>SQL</h3>
+  <pre><code>{{ query }}</code></pre>
+  <h3>Antwort</h3>
+  Das erste Spiel in der Saison hat am <span class="result">{{ saisonstart | amDateFormat:'DD.MM.YYYY HH:mm:ss' }}</span> stattgefunden.
+</div>
+<!-- end box -->
