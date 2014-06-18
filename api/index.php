@@ -15,6 +15,8 @@ $app->get('/', function() use ($app){
   error('This is the KickAss API. Please refer to the documentation.');
 });
 
+// begin group games
+
 $app->group('/games',function () use ($app) {
 
     $app->get('/firstgame/:identifier', function($identifier) use ($app){
@@ -45,7 +47,42 @@ $app->group('/games',function () use ($app) {
         error($e->getMessage());
       }
     });
+
+    $app->get('/spieltag/:spieltag/:hour/:minute', function($spieltag, $hour, $minute) use ($app){
+
+      // catch trivial errors
+      if($hour < 0 || $hour > 23 || $minute < 0 || $minute > 59){
+        error('Wrong time');
+      }
+
+      /* formatted query:
+        SELECT anpfiff_datum, liga_id AS liga, gg.name AS heim, Verein.name AS gast, toreheim, toregast FROM (SELECT *
+          FROM Spiel, Verein
+          WHERE spieltag=:spieltag
+            AND DATE_PART('hour', anpfiff_datum) >= :hour
+            AND DATE_PART('minute', anpfiff_datum) >= :minute
+            AND Verein.id = gastgeber_id) AS gg , Verein WHERE gg.gast_id = Verein.id;
+      */
+
+      $q = new \API\PGQuery('SELECT anpfiff_datum, liga_id AS liga, gg.name AS heim, Verein.name AS gast, toreheim, toregast FROM (SELECT * FROM Spiel, Verein WHERE spieltag=:spieltag AND DATE_PART(\'hour\', anpfiff_datum) >= :hour AND DATE_PART(\'minute\', anpfiff_datum) >= :minute AND Verein.id = gastgeber_id) AS gg , Verein WHERE gg.gast_id = Verein.id;');
+
+      try{
+        $resSet = $q -> exec(array(
+          'spieltag' => $spieltag,
+          'hour' => $hour,
+          'minute' => $minute
+         ));
+        $sql = $q -> getSQL();
+        resp($sql,$resSet);
+      }catch(Exception $e){
+        error($e->getMessage());
+      }
+    });
+
 });
+
+// end group games
+
 
 
 $app->group('/list',function () use ($app) {
@@ -63,7 +100,7 @@ $app->group('/list',function () use ($app) {
 
         $start = new \DateTime($res['start_datum']);
         $end = new \DateTime($res['end_datum']);
-        
+
         $id = $res['liga'].'.'.$res['start_datum'];
         $name = 'Saison '.$start->format('y').'/'.$end->format('y').' '.$res['name'];
         $out[] = array('id' => $id, 'name' => $name);
@@ -89,6 +126,31 @@ $app->group('/list',function () use ($app) {
       }
 
       resp($sql, $resSet);
+    });
+
+    $app->get('/spieltag(/:liga)', function($liga = NULL) use ($app){
+
+      if($liga){
+        $q = new \API\PGQuery('SELECT DISTINCT spieltag FROM Spiel WHERE liga_id = :liga ORDER BY spieltag');
+        $q->bind(array('liga' => $liga));
+      }else{
+        $q = new \API\PGQuery('SELECT DISTINCT spieltag FROM Spiel ORDER BY spieltag');
+      }
+
+      try{
+        $resSet = $q -> exec();
+        $sql = $q -> getSQL();
+      }catch(Exception $e){
+        error($e->getMessage());
+      }
+
+      foreach($resSet as $res){
+
+        $name = sprintf('%2d. Spieltag', $res['spieltag']);
+        $out[] = array('id' => $res['spieltag'], 'name' => $name);
+      }
+
+      resp($sql, $out);
     });
 });
 
