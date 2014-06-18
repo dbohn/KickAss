@@ -16,5 +16,10 @@ $app->get('/', function () use ($app) {
     //echo "Hello, $name";
     $app->render('index.twig');
 });
+
+$app->get('/lars', function () use ($app) {
+    echo "Hello, Lars";
+});
+
 $app->run();
 ?>

@@ -22,5 +22,10 @@
             "name": "Luca Keidel",
             "email": "luca.keidel@fu-berlin.de"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "API\\": "api/"
+        }
+    }
 }

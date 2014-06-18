@@ -8,7 +8,10 @@ CREATE TABLE Liga (
 CREATE TABLE Saison (
     id SERIAL PRIMARY KEY,
     start_datum DATE,
-    end_datum DATE
+    end_datum DATE,
+    liga INTEGER NOT NULL,
+
+    FOREIGN KEY(liga) REFERENCES Liga(id)
 );
 
 CREATE TABLE Verein (
