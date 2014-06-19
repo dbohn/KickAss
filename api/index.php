@@ -171,6 +171,20 @@ $app->group('/list',function () use ($app) {
       resp($sql, $resSet);
     });
 
+    $app->get('/liga', function() use ($app){
+
+      $q = new \API\PGQuery('SELECT id,name FROM Liga');
+
+      try{
+        $resSet = $q -> exec();
+        $sql = $q -> getSQL();
+      }catch(Exception $e){
+        error($e->getMessage());
+      }
+
+      resp($sql, $resSet);
+    });
+
     $app->get('/spieltag(/:liga)', function($liga = NULL) use ($app){
 
       if($liga){
