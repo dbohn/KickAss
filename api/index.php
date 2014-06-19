@@ -79,15 +79,15 @@ $app->group('/team',function () use ($app) {
       }
     });
 
-    /*
-    $app->get('/team/:teamid', function($teamid) use ($app){
+
+    $app->get('/loser', function() use ($app){
       try{
-        $a = new \API\Answer\Team($teamid);
+        $a = new \API\Answer\Loser();
         resp($a->getSQL(),$a->getData());
       }catch(Exception $e){
         error($e->getMessage());
       }
-    }); */
+    });
 });
 
 // end group team
