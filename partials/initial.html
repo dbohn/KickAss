@@ -14,7 +14,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Verein</th>
+        <th colspan="2">Verein</th>
         <th>Spieltage</th>
         <th>Gewonnen</th>
         <th>Unentsch.</th>
@@ -26,6 +26,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="row in table">
+        <td style="text-align: right">{{ $index + 1 }}.</td>
         <td>{{ row.name }}</td>
         <td>{{ row.spieltage }}</td>
         <td>{{ row.gewonnen }}</td>
