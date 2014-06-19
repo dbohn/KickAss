@@ -5,10 +5,16 @@
   <i class="fa fa-chevron-left right"></i>
 </h2>
 <div class="box-lg">
-  Spieltag: <select class="form-control" id="spieltag" ng-change="update()" ng-model="spieltag" ng-options="el.name for el in spieltage">
+  <form class="form-inline" role="form">
+    <label class="control-label" for="spieltag">Spieltag: </label>
+    <select class="form-control" id="spieltag" ng-change="update()" ng-model="spieltag" ng-options="el.name for el in spieltage">
       <option value="">Bitte Spieltag wählen!</option>
     </select>
-  <timepicker ng-model="mytime" ng-change="update()" hour-step="1" minute-step="15" show-meridian="false"></timepicker>
+  </form>
+  <br />
+  <div style="float: left;">
+    <label>Anpfiff um:</label><timepicker ng-model="mytime" ng-change="update()" hour-step="1" minute-step="15" show-meridian="false"></timepicker>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>

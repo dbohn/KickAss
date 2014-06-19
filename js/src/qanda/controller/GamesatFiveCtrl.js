@@ -7,6 +7,7 @@ kickAss.controller('GamesAtFiveCtrl', ['$scope', 'Seasons', function($scope, Sea
     $scope.query = "";
     $scope.spieltage = [];
 
+
     $scope.data = [];
 
     Seasons.spieltage().success(function(data) {
@@ -14,7 +15,12 @@ kickAss.controller('GamesAtFiveCtrl', ['$scope', 'Seasons', function($scope, Sea
     });
 
     $scope.update = function() {
-        Seasons.gamesatfive($scope.spieltag.id, $scope.mytime.getHours(), $scope.mytime.getMinutes()).success(function(data) {
+        if (!$scope.spieltag) {
+            var spieltag = 1;
+        } else {
+            var spieltag = $scope.spieltag.id;
+        }
+        Seasons.gamesatfive(spieltag, $scope.mytime.getHours(), $scope.mytime.getMinutes()).success(function(data) {
             $scope.data = data.payload;
             $scope.query = data.sql;
         });
