@@ -39,7 +39,4 @@ $(function(){
       }
     });
 
-  // init highlight.js
-  hljs.initHighlightingOnLoad();
-
 });
