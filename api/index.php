@@ -41,6 +41,57 @@ $app->group('/games',function () use ($app) {
 
 // end group games
 
+// begin group player
+
+$app->group('/player',function () use ($app) {
+
+    $app->get('/playergoals/:tore', function($tore) use ($app){
+      try{
+        $a = new \API\Answer\Playergoals($tore);
+        resp($a->getSQL(),$a->getData());
+      }catch(Exception $e){
+        error($e->getMessage());
+      }
+    });
+
+    $app->get('/team/:teamid', function($teamid) use ($app){
+      try{
+        $a = new \API\Answer\Team($teamid);
+        resp($a->getSQL(),$a->getData());
+      }catch(Exception $e){
+        error($e->getMessage());
+      }
+    });
+});
+
+// end group player
+
+// begin group team
+
+$app->group('/team',function () use ($app) {
+
+    $app->get('/won/:teamid', function($teamid) use ($app){
+      try{
+        $a = new \API\Answer\Won($teamid);
+        resp($a->getSQL(),$a->getData());
+      }catch(Exception $e){
+        error($e->getMessage());
+      }
+    });
+
+    /*
+    $app->get('/team/:teamid', function($teamid) use ($app){
+      try{
+        $a = new \API\Answer\Team($teamid);
+        resp($a->getSQL(),$a->getData());
+      }catch(Exception $e){
+        error($e->getMessage());
+      }
+    }); */
+});
+
+// end group team
+
 $app->get('/tabelle(/:liga)', function ($liga = 1) use ($app){
 try{
   $a = new \API\Answer\Tabelle($liga);
