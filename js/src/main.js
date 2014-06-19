@@ -13,6 +13,7 @@ kickAss.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
                 templateUrl: 'partials/menus/qanda.html'
             },
             "main": {
+                controller: 'TableCtrl',
                 templateUrl: 'partials/initial.html'
             }
         }

@@ -1,16 +1,41 @@
 <!-- begin box -->
 <h2 class="hl-box" id="description">
   <i class="fa fa-chevron-right left"></i>
-  Questions and Answers
+  Bundesligatabelle
   <i class="fa fa-chevron-left right"></i>
 </h2>
 <div class="box-lg">
-  <p>
-    Hier gibt's so die Antworten auf die Queries :)
-  </p>
-  <p>
-    Beispiel:
-    <input type="text" ng-model="test"> {{ test }}
-  </p>
+  <form class="form-inline" role="form">
+    <label class="control-label" for="saison">Bitte eine Liga auswählen: </label>
+    <select class="form-control" id="saison" ng-change="selectedSeason()" ng-model="season" ng-options="el.name for el in seasons">
+      <option value="">Bitte Saison wählen!</option>
+    </select>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Verein</th>
+        <th>Spieltage</th>
+        <th>Gewonnen</th>
+        <th>Unentsch.</th>
+        <th>Verloren</th>
+        <th>Tore</th>
+        <th>Diff.</th>
+        <th>Punkte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in table">
+        <td>{{ row.name }}</td>
+        <td>{{ row.spieltage }}</td>
+        <td>{{ row.gewonnen }}</td>
+        <td>{{ row.unentschieden }}</td>
+        <td>{{ row.verloren }}</td>
+        <td>{{ row.tore }}:{{ row.gegentore }}</td>
+        <td>{{ row.diff }}</td>
+        <td>{{ row.punkte }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <!-- end box -->
