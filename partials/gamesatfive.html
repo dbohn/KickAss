@@ -1,0 +1,40 @@
+<!-- begin box -->
+<h2 class="hl-box" id="description">
+  <i class="fa fa-chevron-right left"></i>
+  Spiele am Spieltag
+  <i class="fa fa-chevron-left right"></i>
+</h2>
+<div class="box-lg">
+  Spieltag: <select class="form-control" id="spieltag" ng-change="update()" ng-model="spieltag" ng-options="el.name for el in spieltage">
+      <option value="">Bitte Spieltag wählen!</option>
+    </select>
+  <timepicker ng-model="mytime" ng-change="update()" hour-step="1" minute-step="15" show-meridian="false"></timepicker>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Liga</th>
+        <th>Gastgeber</th>
+        <th>Gast</th>
+        <th>Ergebnis</th>
+        <th>Anpfiff</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in data">
+        <td>{{ row.liga }}</td>
+        <td>{{ row.heim }}</td>
+        <td>{{ row.gast }}</td>
+        <td>{{ row.toreheim }}:{{ row.toregast }}</td>
+        <td>{{ row.anpfiff_datum | amDateFormat:'DD.MM.YYYY, HH:mm' }} Uhr</td>
+      </tr>
+      <tr ng-show="data.length == 0">
+        <td colspan="4" style="text-align: center">Es existieren keine Spiele zu der Zeit!</td>
+      </tr>
+    </tbody>
+  </table>
+  <div ng-show="query">
+    <h3>SQL <i title="Klicken zum Expandieren" ng-class="queryExpanded ? 'fa-chevron-up' : 'fa-chevron-down'" class="fa" ng-click="queryExpanded = !queryExpanded"></i></h3>
+    <div ng-show="queryExpanded" sql-view sql="query"></div>
+  </div>
+</div>
+<!-- end box -->

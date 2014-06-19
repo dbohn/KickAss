@@ -1,7 +1,7 @@
 
 // App Code
 
-var kickAss = angular.module('kickass', ['ui.router', 'angularMoment']);
+var kickAss = angular.module('kickass', ['ui.router', 'ui.bootstrap', 'angularMoment']);
 
 kickAss.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -26,6 +26,17 @@ kickAss.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
             "main": {
                 controller: 'FirstgameCtrl',
                 templateUrl: 'partials/firstgame.html'
+            }
+        }
+    }).state('gamesatfive', {
+        url: '/gamesatfive',
+        views: {
+            "nav": {
+                templateUrl: 'partials/menus/qanda.html'
+            },
+            "main": {
+                controller: 'GamesAtFiveCtrl',
+                templateUrl: 'partials/gamesatfive.html'
             }
         }
     });

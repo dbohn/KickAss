@@ -7,7 +7,7 @@
 <div class="box-lg">
   <form class="form-inline" role="form">
     <label class="control-label" for="saison">Bitte eine Liga auswählen: </label>
-    <select class="form-control" id="saison" ng-change="selectedSeason()" ng-model="season" ng-options="el.name for el in seasons">
+    <select class="form-control" id="saison" ng-change="selectedLiga()" ng-model="liga" ng-options="el.name for el in ligen">
       <option value="">Bitte Saison wählen!</option>
     </select>
   </form>
@@ -38,5 +38,9 @@
       </tr>
     </tbody>
   </table>
+  <div ng-show="query">
+    <h3>SQL <i title="Klicken zum Expandieren" ng-class="queryExpanded ? 'fa-chevron-up' : 'fa-chevron-down'" class="fa" ng-click="queryExpanded = !queryExpanded"></i></h3>
+    <div ng-show="queryExpanded" sql-view sql="query"></div>
+  </div>
 </div>
 <!-- end box -->
