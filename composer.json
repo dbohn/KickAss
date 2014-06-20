@@ -6,7 +6,8 @@
         "slim/views": "*",
         "slim/middleware": "*",
         "twig/twig": "*",
-        "league/csv": "*"
+        "league/csv": "*",
+        "michelf/php-markdown": "1.4.*@dev"
     },
     "license": "MIT",
     "authors": [

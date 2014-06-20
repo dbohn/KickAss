@@ -27,7 +27,8 @@ var third_party = [
     'bower_components/angular-ui-router/release/angular-ui-router.min.js',
     'bower_components/moment/min/moment.min.js',
     'bower_components/moment/lang/de.js',
-    'bower_components/angular-moment/angular-moment.min.js'
+    'bower_components/angular-moment/angular-moment.min.js',
+    'bower_components/angular-sanitize/angular-sanitize.min.js'
 ];
 
 // The JavaScript Task is currently unused, but will be used soon for Angular

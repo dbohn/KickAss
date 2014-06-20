@@ -1,0 +1,8 @@
+<ul class="nav nav-pills nav-stacked navigation" id="sidebar">
+  <li ui-sref-active="active">
+    <a ui-sref="documentation">Dokumentation</a>
+  </li>
+  <li ui-sref-active="active" ng-repeat="page in pages">
+    <a ui-sref="documentation.page({page: page.ref})">{{ page.title }}</a>
+  </li>
+</ul>
