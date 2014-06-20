@@ -23,8 +23,8 @@ $app->get('/documentation(/:page)', function($page = null) use ($app) {
 		$files = array_map(function($el) {
 			$base = basename($el);
 			$ref = (substr($base, 0, strpos($base, '.md')));
-			// TBD: Read first line or something as title
-			$title = $ref;
+
+			$title = titleForFile($el, $ref);
 			return array('ref' => $ref, 'title' => $title);
 		}, $files);
   		$resp = array('pages' => $files);
@@ -35,7 +35,8 @@ $app->get('/documentation(/:page)', function($page = null) use ($app) {
 			$markdown = file_get_contents($path);
 			$parsed = \Michelf\MarkdownExtra::defaultTransform($markdown);
 
-			$resp = array('docs' => $parsed);
+			$title = titleForFile($path, $file);
+			$resp = array('docs' => $parsed, 'title' => $title, 'ref' => $file);
 		} else {
 			$response->setStatus(404);
 			$resp = array('error' => 'Page not found!');
@@ -46,6 +47,18 @@ $app->get('/documentation(/:page)', function($page = null) use ($app) {
 
 	$response->body(json_encode($resp, JSON_PRETTY_PRINT));
 });
+
+function titleForFile($file, $default)
+{
+	$fp = fopen($file, 'r');
+	$title = $default;
+	if ($fp) {
+		$title = ltrim(fgets($fp), '#');
+		fclose($fp);
+	}
+
+	return $title;
+}
 
 $app->run();
 ?>

@@ -5,5 +5,6 @@ kickAss.controller('DocumentationCtrl', ['$scope', 'Docs', '$stateParams', funct
 
 	Docs.showPage($stateParams.page).success(function(data) {
 		$scope.page.contents = data.docs;
+		$scope.page.title = data.title;
 	});
 }]);
