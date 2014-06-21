@@ -2,7 +2,7 @@
 
 namespace API\Answer;
 
-abstract class Answer implements IAnswer{
+abstract class Answer implements \API\IDataProvider{
 
   private $query;
   private $data;

@@ -1,8 +1,8 @@
 <?php
 
-namespace API\Answer;
+namespace API;
 
-interface IAnswer{
+interface IDataProvider{
   public function getData();
   public function getSQL();
 }

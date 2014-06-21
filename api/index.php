@@ -101,13 +101,28 @@ try{
 }
 });
 
+$app->get('/arff', function () use ($app){
+
+  $loader = new Twig_Loader_Filesystem('Arff/templates');
+  $twig = new Twig_Environment($loader);
+try{
+  $a = new \API\Arff\Arff();
+  $arff = $twig->render('bundesliga.twig', array('data' => $a -> getData()));
+
+
+  resp($a->getSQL(),$arff);
+;}catch(Exception $e){
+  error($e->getMessage());
+}
+});
+
 
 $app->group('/list',function () use ($app) {
 
     $app->get('/saison', function() use ($app){
       try{
         $l = new \API\Lists\Saison();
-        resp(NULL,$l->getList());
+        resp($l->getSQL(),$l->getData());
       }catch(Exception $e){
         error($e->getMessage());
       }
@@ -117,7 +132,7 @@ $app->group('/list',function () use ($app) {
     $app->get('/verein(/:liga)', function($liga = NULL) use ($app){
       try{
         $l = new \API\Lists\Verein($liga);
-        resp(NULL,$l->getList());
+        resp($l->getSQL(),$l->getData());
       }catch(Exception $e){
         error($e->getMessage());
       }
@@ -126,7 +141,7 @@ $app->group('/list',function () use ($app) {
     $app->get('/liga', function() use ($app){
       try{
         $l = new \API\Lists\Liga();
-        resp(NULL,$l->getList());
+        resp($l->getSQL(),$l->getData());
       }catch(Exception $e){
         error($e->getMessage());
       }
@@ -135,7 +150,7 @@ $app->group('/list',function () use ($app) {
     $app->get('/spieltag(/:liga)', function($liga = NULL) use ($app){
       try{
         $l = new \API\Lists\Spieltag($liga);
-        resp(NULL,$l->getList());
+        resp($l->getSQL(),$l->getData());
       }catch(Exception $e){
         error($e->getMessage());
       }

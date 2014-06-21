@@ -2,7 +2,7 @@
 
 namespace API\Lists;
 
-abstract class Lists implements \API\Lists\IList{
+abstract class Lists implements \API\IDataProvider{
 
   private $query;
   protected $list;
@@ -16,6 +16,14 @@ abstract class Lists implements \API\Lists\IList{
   }
 
   abstract public function getList();
+
+  public function getData(){
+    return $this -> getList();
+  }
+
+  public function getSQL(){
+    return NULL;
+  }
 
 }
 
