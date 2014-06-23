@@ -1,7 +1,7 @@
 @relation bundesliga
 
 % Name des Vereins
-@attribute verein string
+@attribute verein {% verbatim %} { {% endverbatim %}{{vereine}}{% verbatim %} } {% endverbatim %}
 
 % Tore der letzten 3 Spiele
 @attribute tore numeric
@@ -15,6 +15,7 @@
 % Durchschnittliche Steigung der Tore der letzten 5 Spiele
 @attribute steigung numeric
 
+@data
 {% for d in data %}
-            {{ d.name }},{{ d.tore }},{{ d.gegentore }},{{ d.verloren }},{{ d.steigung }}
+"{{ d.name }}",{{ d.tore }},{{ d.gegentore }},{{ d.verloren }},{{ d.steigung }}
 {% endfor %}

@@ -18,7 +18,7 @@ class Arff implements \API\IDataProvider{
   public function getData(){
 
 $query =<<<QUERY
-SELECT tore.tore AS tore, gegen.tore AS gegentore, (VerGast.ver + VerHeim.ver) AS verloren, g5.tore AS g5, g4.tore AS g4, g3.tore AS g3, g2.tore AS g2, g1.tore AS g1
+SELECT tore.tore AS tore, gegen.tore AS gegentore, (VerGast.ver + VerHeim.ver) AS verloren, g5.tore AS g5, g1.tore AS g1
 FROM
 
 	(SELECT SUM(oq.tore) AS tore FROM
@@ -45,23 +45,6 @@ FROM
 	  SELECT anpfiff_datum, toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS q
 	 ORDER BY q.anpfiff_datum DESC LIMIT 1) AS g1,
 
-
-	(SELECT tore FROM
-	 (SELECT anpfiff_datum, toreGast AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
-	  SELECT anpfiff_datum, toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS q
-	ORDER BY q.anpfiff_datum DESC LIMIT 1 OFFSET 1) AS g2,
-
-
-	(SELECT tore FROM
-	 (SELECT anpfiff_datum, toreGast AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
-	  SELECT anpfiff_datum, toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS q
-	ORDER BY q.anpfiff_datum DESC LIMIT 1 OFFSET 2) AS g3,
-
-	(SELECT tore FROM
-	 (SELECT anpfiff_datum, toreGast AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
-	  SELECT anpfiff_datum, toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS q
-	ORDER BY q.anpfiff_datum DESC LIMIT 1 OFFSET 3) AS g4,
-
 	(SELECT tore FROM
 	 (SELECT anpfiff_datum, toreGast AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
 	  SELECT anpfiff_datum, toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS q
@@ -69,22 +52,34 @@ FROM
 
 QUERY;
 
+  $list_vereine = '';
+
     foreach($this->vereine as $verein){
 
       $q = new \API\PGQuery($query);
       $data = $q->exec(array('verein' => $verein['id']));
       $data = $data[0];
-      
+
+      // Mittelwertsatz
+      $steigung = ($data['g5'] - $data['g1']) / (5-1);
+
+      $name = preg_replace('/\s/', '-', $verein['name']);
+
       $out[] = array(
-        'name' => $verein['name'],
+        'name' => $name,
         'tore' => $data['tore'],
         'gegentore' => $data['gegentore'],
         'verloren' => $data['verloren'],
-        'steigung' => 0 // to be implemented
+        'steigung' => $steigung
       );
+
+      $list_vereine.=$name.',';
     }
 
-    return $out;
+    $data['data'] = $out;
+    $data['vereine'] = rtrim($list_vereine, ',');
+
+    return $data;
   }
 }
 

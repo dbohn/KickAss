@@ -101,16 +101,21 @@ try{
 }
 });
 
-$app->get('/arff', function () use ($app){
+$app->get('/arff(/:opt)', function ($opt = NULL) use ($app){
 
   $loader = new Twig_Loader_Filesystem('Arff/templates');
   $twig = new Twig_Environment($loader);
 try{
   $a = new \API\Arff\Arff();
-  $arff = $twig->render('bundesliga.twig', array('data' => $a -> getData()));
+  $data = $a -> getData();
+  $arff = $twig->render('bundesliga.twig', array('data' => $data['data'], 'vereine' => $data['vereine']));
 
+  if($opt != 'download'){
+    resp($a->getSQL(),$arff);
+  }else{
+    resp($a->getSQL(), $arff, false, false, 'KickAss_Bundesliga.arff', strlen($arff));
+  }
 
-  resp($a->getSQL(),$arff);
 ;}catch(Exception $e){
   error($e->getMessage());
 }
@@ -170,17 +175,30 @@ function error($msg){
   $app->stop();
 }
 
-function resp($sql, $payload, $error = false){
+function resp($sql, $payload, $error = false, $json = true, $filename = NULL, $contentlength = 0){
   global $app, $resp;
 
   $response = $app->response();
-  $response['Content-Type'] = 'application/json';
 
-  $resp['status'] = $error? 'error' : 'ok';
-  $resp['sql'] = $sql;
-  $resp['payload'] = $payload;
+  if($json){
+    $response['Content-Type'] = 'application/json';
 
-  $response->body(json_encode($resp, JSON_PRETTY_PRINT));
+    $resp['status'] = $error? 'error' : 'ok';
+    $resp['sql'] = $sql;
+    $resp['payload'] = $payload;
+
+    $response->body(json_encode($resp, JSON_PRETTY_PRINT));
+
+  }else{
+
+    $response['Content-Type'] = 'application/octet-stream';
+    $response['Content-Disposition'] = 'attachment; filename="'.$filename.'"';
+    $response['Content-Length'] = $contentlength;
+
+    $response->body($payload);
+  }
+
+
 }
 
 
