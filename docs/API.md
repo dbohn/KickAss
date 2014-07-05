@@ -186,7 +186,8 @@ Neben der reinen Beantwortung der Fragen bietet die KickAss API noch eine komple
 
 ### Tabelle: `api/tabelle`
 
-* Parameter: -
+* Parameter: `api/tabelle[/<liga>]`
+    * `<liga>`: Liga (`1|2|3`)
 * Rückgabe:
 
 ```
@@ -214,4 +215,4 @@ Für das Data Mining kann eine Arff-Datei für Weka erzeugt und exportiert werde
 
 * Parameter: `api/arff[/download]`
     * `download`: Wird dieser Parameter mit angegeben, wird die reine Arff Datei zum Download angeboten.
-* Rückgabe: Im `payload` Feld befindet sich die Arff Datei. 
+* Rückgabe: Im `payload` Feld befindet sich die Arff Datei.
