@@ -15,7 +15,17 @@
 % Durchschnittliche Steigung der Tore der letzten 5 Spiele
 @attribute steigung numeric
 
+% Punktzahl in der Liga
+@attribute punkte numeric
+
+% Durchschnittliche Anzahl der Tore pro Spiel
+@attribute avgTore numeric
+
+% Verhältnis von Toren zu Gegentoren (insgesamt betrachtet)
+@attribute verhaeltnis numeric
+
+
 @data
 {% for d in data %}
-"{{ d.name }}",{{ d.tore }},{{ d.gegentore }},{{ d.verloren }},{{ d.steigung }}
+"{{ d.name }}",{{ d.tore }},{{ d.gegentore }},{{ d.verloren }},{{ d.steigung }},{{ d.punkte }},{{ d.avgtore }},{{ d.verhaeltnis }}
 {% endfor %}

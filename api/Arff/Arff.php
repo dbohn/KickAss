@@ -18,7 +18,7 @@ class Arff implements \API\IDataProvider{
   public function getData(){
 
 $query =<<<QUERY
-SELECT tore.tore AS tore, gegen.tore AS gegentore, (VerGast.ver + VerHeim.ver) AS verloren, g5.tore AS g5, g1.tore AS g1
+SELECT tore.tore AS tore, gegen.tore AS gegentore, (VerGast.ver + VerHeim.ver) AS verloren, g5.tore AS g5, g1.tore AS g1, Punkte.punkte AS punkte, ROUND(avgTore.avgTore, 2) AS avgTore, ROUND(verh.verhaeltnis::numeric, 2) AS verhaeltnis
 FROM
 
 	(SELECT SUM(oq.tore) AS tore FROM
@@ -48,8 +48,26 @@ FROM
 	(SELECT tore FROM
 	 (SELECT anpfiff_datum, toreGast AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
 	  SELECT anpfiff_datum, toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS q
-	ORDER BY q.anpfiff_datum DESC LIMIT 1 OFFSET 4) AS g5
+	ORDER BY q.anpfiff_datum DESC LIMIT 1 OFFSET 4) AS g5,
 
+	(SELECT (GewHeim.anz + GewAus.anz)*3 +(UnAus.anz + UnHeim.anz) AS punkte FROM
+	 (SELECT COUNT(*) AS anz FROM Spiel WHERE gast_id = :verein AND toreGast > toreHeim) AS GewHeim,
+	 (SELECT COUNT(*) AS anz FROM Spiel WHERE gastgeber_id = :verein AND toreHeim > toreGast) AS GewAus,
+	 (SELECT COUNT(*) AS anz FROM Spiel WHERE gastgeber_id = :verein AND toreHeim = toreGast) AS UnHeim,
+	 (SELECT COUNT(*) AS anz FROM Spiel WHERE gast_id = :verein AND toreHeim = toreGast) AS UnAus) AS Punkte,
+
+	(SELECT AVG(tore) as avgTore FROM
+	 (SELECT toreGast AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
+	  SELECT toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS Spiele) AS avgTore,
+
+	(SELECT (CAST(gegen.tore AS float) / CAST(eigene.tore AS float)) AS verhaeltnis FROM
+	 (SELECT SUM(sp.tore) AS tore  FROM
+	  (SELECT toreGast AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
+	   SELECT toreHeim AS tore FROM Spiel WHERE gastgeber_id = :verein) AS sp) AS eigene,
+
+	 (SELECT SUM(sp.tore) AS tore FROM
+	  (SELECT toreHeim AS tore FROM Spiel WHERE gast_id = :verein UNION ALL
+	   SELECT toreGast AS tore FROM Spiel WHERE gastgeber_id = :verein) AS sp) AS gegen) AS verh
 QUERY;
 
   $list_vereine = '';
@@ -70,7 +88,10 @@ QUERY;
         'tore' => $data['tore'],
         'gegentore' => $data['gegentore'],
         'verloren' => $data['verloren'],
-        'steigung' => $steigung
+        'steigung' => $steigung,
+        'punkte' => $data['punkte'],
+        'avgtore' => $data['avgtore'],
+        'verhaeltnis' => $data['verhaeltnis']
       );
 
       $list_vereine.=$name.',';
