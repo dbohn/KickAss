@@ -1,9 +1,22 @@
 <?php
+/**
+ * Antwort für Frage #1
+ *
+ * @author Luca Keidel
+ */
 
 namespace API\Answer;
 
+/**
+ * Antwort für Frage #1
+ */
 class Firstgame extends \API\Answer\Answer{
 
+  /**
+   * Konstruktor: führt die Abfrage durch
+   *
+   * @param int $identifier Saison Identifier
+   */
   public function __construct($identifier){
     parent::__construct('SELECT anpfiff_datum FROM Spiel, Saison, Liga WHERE Saison.liga = :liga AND Spiel.saison_id = Saison.id AND Saison.start_datum = :datum ORDER BY Spieltag, anpfiff_datum LIMIT 1 ');
 

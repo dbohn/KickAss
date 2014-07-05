@@ -1,9 +1,20 @@
 <?php
+/**
+ * Antwort für Frage #6
+ *
+ * @author Luca Keidel
+ */
 
 namespace API\Answer;
 
+/**
+ * Antwort für Frage #6
+ */
 class Loser extends \API\Answer\Answer{
 
+  /**
+   * Konstruktor: führt die Abfrage durch
+   */
   public function __construct(){
 
 $query=<<<QUERY

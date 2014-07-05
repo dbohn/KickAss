@@ -2,22 +2,34 @@
 
 <?php
 
+/**
+ * KickAss Import
+ *
+ * Programmatischer Import für die CSV Daten von @link{http://dbup2date.uni-bayreuth.de/bundesliga.html}
+ *
+ * @author Luca Keidel
+ * @author David Bohn
+ */
+
+/**
+ * Autoloader
+ */
 require '../vendor/autoload.php';
 
 use League\Csv\Reader;
-
 use API\Config;
 
+/**
+ * KickAss Import
+ *
+ * Import Klasse für den programmatischen Import von den CSV
+ * Daten
+ */
 class Import{
 
   /**
-   * Config
+   * @var Array $add Bereitstellungen zusätzlicher Informtationen, die aus den Daten nicht hervorgehen
    */
-  private $db_host = '';
-  private $db_user = '';
-  private $db_password = '';
-  private $db_name = '';
-
   private $add = array(
     array(                            // Saison für die 1. Liga
       'saison_start' => '2013-08-09',
@@ -33,14 +45,39 @@ class Import{
     )
   );
 
+  /**
+   * @var string $path_liga Pfad zur CSV-Datei mit den Ligen
+   */
   private $path_liga;
+
+  /**
+   * @var string $path_spiel Pfad zur CSV-Datei mit den Spielen
+   */
   private $path_spiel;
+
+  /**
+   * @var string $path_spieler Pfad zur CSV-Datei mit den Spielern
+   */
   private $path_spieler;
+
+  /**
+   * @var string $path_verein Pfad zur CSV-Datei mit den Vereinen
+   */
   private $path_verein;
 
+  /**
+   * @var \PDO $dbpath Das verwendete PDO Objekt
+   */
   private $dbpath;
 
-
+  /**
+   * Import Konstruktor, initialisiert den Import.
+   *
+   * @param string $path_liga Pfad zur Liga CSV-Datei
+   * @param string $path_spiel Pfad zur Spiel CSV-Datei
+   * @param string $path_spieler Pfad zur Spieler CSV-Datei
+   * @param string $path_verein Pfad zur Verein CSV-Datei
+   */
   public function __construct($path_liga, $path_spiel, $path_spieler, $path_verein){
     $this->db_host = Config::$db_host;
     $this->db_user = Config::$db_user;
@@ -88,6 +125,10 @@ class Import{
 
   }
 
+  /**
+   * Startet den Import
+   *
+   */
   public function run(){
 
     printf("Starting the import... \n");
@@ -137,7 +178,7 @@ class Import{
     $sth = $db->prepare('INSERT INTO Saison(start_datum, end_datum, liga) VALUES (:start, :end, :liga) RETURNING id');
 
     for($i = 1; $i <= 3; $i++){
-     
+
       $sth->execute(array(
         'start' => $this -> add[($i-1)]['saison_start'],
         'end' => $this -> add[($i-1)]['saison_ende'],
@@ -285,7 +326,7 @@ class Import{
           $err = $db -> errorInfo();
           $this -> genericError($err[2]);
         }
- 
+
         $sth_tore->bindValue(':saisonid', $saison_ids[intval($liga_id)-1], PDO::PARAM_STR);
         $sth_tore->bindValue(':spielerid', utf8_encode($row[0]), PDO::PARAM_STR);
         $sth_tore->bindValue(':tore', utf8_encode($row[6]), PDO::PARAM_STR);
@@ -305,11 +346,23 @@ class Import{
     printf("Import finished!\n");
   }
 
+  /**
+   * Gibt eine Fehlermeldung auf dem STDERR Kanal aus
+   * und beendet die Programmausführung.
+   *
+   * @param string $msg Fehlermeldung
+   */
   private function genericError($msg){
     fprintf(STDERR, "ERROR: %s\n", $msg);
     exit(-1);
   }
 
+  /**
+   * Anzeigen eines Fortschrittsbalkens
+   *
+   * @param int $w Wert
+   * @param int $g Grundwert
+   */
   private function progress($w, $g){
     $percent = round(($w / $g) * 100);
     $bar_segs = round($percent / 100 * 60);
@@ -320,7 +373,12 @@ class Import{
     printf("\r%3d%% [%-60s] %d/%d", $percent, $bar, $w, $g);
   }
 
-
+  /**
+   * Spezielle Fehlermeldung für den Fall, dass eine der benötigten Dateien fehlt
+   *
+   * @param string $descr Beschreibung der Datei die fehlt
+   * @param string $file Der fehlerhafte Dateipfad 
+   */
   private function fileError($descr, $file){
     fprintf(STDERR, "%s: The file %s does not exist!\n", $descr, $file);
     exit(-1);

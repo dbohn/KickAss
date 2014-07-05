@@ -1,12 +1,29 @@
 <?php
+/**
+ *  KickAss API
+ *
+ * Routing für die KickAss API
+ *
+ * @author Luca Keidel
+ */
+
+ /**
+  * Autoloader
+  */
 require '../vendor/autoload.php';
 
+/**
+ * @var Array resp Array für die Antwort
+ */
 $resp = array(
   'status' => NULL, // (ok|error)
   'sql' => NULL,  // SQL Query
   'payload' => NULL, // Data
 );
 
+/**
+ * @var \Slim\Slim $app Slim-App Objekt
+ */
 $app = new \Slim\Slim();
 
 $app->setName('KickAss API');
@@ -168,6 +185,11 @@ $app->notFound(function (){
 
 $app->run();
 
+/**
+ *  Ausgabe einer Fehlermeldung
+ *
+ * @param string $msg Fehlermeldung
+ */
 function error($msg){
   global $app;
   $err = array('status' => 'error', 'msg' => $msg);
@@ -175,6 +197,16 @@ function error($msg){
   $app->stop();
 }
 
+/**
+ * Ausgabe einer Antwort
+ *
+ * @param string $sql Der verwendete SQL-String
+ * @param string $payload Die Payload
+ * @param boolean $error (Default: false) Angabe, ob ein Fehler aufgetreten ist
+ * @param boolean $json (Default: true) Angabe, ob die Daten als JSON ausgegeben werden
+ * @param string $filename Relevant falls $json = false. Dateiname der Datei, die zum Download angeboten wird
+ * @param int $contentlength Ebenfalls nnur relevant wenn $json = false ist. Größe der Download-Datei in Bytes 
+ */
 function resp($sql, $payload, $error = false, $json = true, $filename = NULL, $contentlength = 0){
   global $app, $resp;
 

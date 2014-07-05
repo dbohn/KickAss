@@ -1,20 +1,46 @@
 <?php
-
+/**
+ * Erzeugt die Arff-Datei
+ *
+ * Erzeugung einer Arff Datei für die Verwendung mit Weka zum Data Mining.
+ *
+ * @author Luca Keidel
+ */
 namespace API\Arff;
 
+/**
+ * Erzeugung einer Arff-Datei
+ *
+ * Es handelt sich hierbei natürlich auch um einen DataProvider.
+ */
 class Arff implements \API\IDataProvider{
 
+  /**
+   * @var Array $vereine Speichert alle Vereine
+   */
   private $vereine;
 
+  /**
+   * Konstruktor, liest alle Vereine aus und speichert diese in $vereine.
+   */
   public function __construct(){
     $q = new \API\PGQuery('SELECT id,name FROM Verein');
     $this->vereine = $q->exec();
   }
 
+  /**
+   * Getter für SQL
+   *
+   * In diesem Fall liefern wir aber kein SQL zurück, aber da diese Methode vom Interface
+   * gefordert ist, müssen wir hier sie implementieren.
+   */
   public function getSQL(){
     return NULL;
   }
 
+  /**
+   * Führt die Abfrage aus und liefert die Daten zurück
+   */
   public function getData(){
 
 $query =<<<QUERY

@@ -1,9 +1,27 @@
 <?php
+/**
+ * Interface für DataProvider.
+ *
+ * Alle Klassen, die Informationen für die API bereitstellen,
+ * sind DataProvider. Die API gibt neben den eigentlichen Daten
+ * auch immer ein weiteres Feld zurück, dass den verwendeten SQL
+ * Befehl beinhaltet. Aus diesem Grund definiert das Interface neben
+ * der offensichtlichen Methode getData() auch noch einen Getter für SQL.
+ */
 
 namespace API;
 
+/**
+ * Interface für DataProvider
+ */
 interface IDataProvider{
+  /**
+   * Getter für Daten
+   */
   public function getData();
+  /**
+   * Getter für das verwendete SQL
+   */
   public function getSQL();
 }
 

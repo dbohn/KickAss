@@ -1,9 +1,26 @@
 <?php
 
+/**
+ * Ergebnistabelle
+ *
+ * Gibt eine komplette Spieltabelle mit den Ergebnissen zu einer Liga zurück. Berücksichtigt werden dabei die insgesamt gespielten Spieltage, gewonnene, verlorene und unentschiede Spiele, die Tore und Gegentore in allen Spielen, die Differenz zwischen Toren und Gegentoren und die Punkte.
+ *
+ * @author Luca Keidel
+ * @author David Bohn
+ */
+
 namespace API\Answer;
 
+/**
+ * Ergebnistabelle
+ */
 class Tabelle extends \API\Answer\Answer{
 
+  /**
+   * Konstruktur: führt die Abfrage aus
+   *
+   * @param int $liga ID der Liga (1|2|3)
+   */
   public function __construct($liga){
 
 $query = <<<QUERY

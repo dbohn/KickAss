@@ -1,0 +1,31 @@
+<?php
+/**
+ * Interface für Query Klassen
+ *
+ * Der Zugriff auf die Datenbank ist durch die Query Klassen gekapselt. Da für verschiedene
+ * DBMS verschiedene Implementierung nötig werden könnten, müssen alle Query Klassen diesem
+ * Interface entsprechen.
+ *
+ * @author Luca Keidel
+ */
+namespace API;
+
+/**
+ * Interface für Queries
+ */
+interface IQuery{
+  /**
+   * Führt die Abfrage aus
+   *
+   * @param Array $arr Array mit den Variablen, die im Prepared Statement gebunden werden sollen
+   */
+  public function exec($arr);
+
+  /**
+   * Getter für SQL
+   */
+  public function getSQL();
+}
+
+?>
+

@@ -1,6 +1,22 @@
 <?php
+/**
+* KickAss - DBS-Projekt SoSe 2014 FU-Berlin
+*
+* Routing für die Weboberfläche der Anwendung
+*
+* @author David Bohn
+* @author Luca Keidel
+*
+*/
+
+/**
+ * Autoloader
+ */
 require 'vendor/autoload.php';
 
+/**
+ * @var \Slim\Slim Die Slim Application
+ */
 $app = new \Slim\Slim(array(
     'view' => new \Slim\Views\Twig(),
     'templates.path' => 'views'
@@ -48,6 +64,14 @@ $app->get('/documentation(/:page)', function($page = null) use ($app) {
 	$response->body(json_encode($resp, JSON_PRETTY_PRINT));
 });
 
+/**
+ * Liest den Titel aus einer Datei im Markdown Format aus.
+ *
+ * @param string $file Dateipfad zur Markdown-Datei
+ * @param string $default Standardwert für den Titel
+ *
+ * @return string Titel für die angegebene Datei
+ */
 function titleForFile($file, $default)
 {
 	$fp = fopen($file, 'r');
