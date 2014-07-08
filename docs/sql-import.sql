@@ -20,27 +20,27 @@ INSERT INTO Verein(id, name)
 
 -- Import of Team
 -- row_number() OVER() is giving us the count of the fetched row
-INSERT INTO Team 
+INSERT INTO Team(id, name, verein_id, liga_id, saison_id) 
 	SELECT row_number() OVER() as id, v.name as name, v.V_ID as verein_id, l.id as liga_id, s.id as saison_id 
 		FROM temp.Verein as v, Liga as l, Saison as s WHERE v.Liga = l.id AND s.liga = l.id;
 
 -- Import of Spiele
-INSERT INTO Spiel 
+INSERT INTO Spiel(id, anpfiff_datum, ort, spieldauer, saison_id, liga_id, gast_id, gastgeber_id, spieltag, toreHeim, toreGast) 
 	SELECT row_number() OVER() as id, ts.Datum as anpfiff_datum, 'unknown' as ort, -1 as spieldauer, 
 		s.id as saison_id, t.liga_id as liga_id, ts.Gast as gast_id, ts.Heim as gastgeber_id, 
 		ts.Spieltag as spieltag, ts.Tore_Heim as toreHeim, ts.Tore_Gast as toreGast
 		FROM temp.Spiel as ts, Saison as s, Team as t WHERE t.id=ts.Heim AND s.id=t.saison_id;
 
 -- Import of Spieler
-INSERT INTO Spieler 
+INSERT INTO Spieler(id, name, heimatland) 
 	SELECT Spieler_Id as id, Spieler_Name as name, Land as heimatland FROM temp.Spieler;
 
 -- Import of spielt_bei
-INSERT INTO spielt_bei 
+INSERT INTO spielt_bei(team_id, spieler_id, trikotnr)
 	SELECT t.id as team_id, s.Spieler_id as spieler_id, s.Trikot_Nr as trikotnr
 		FROM temp.Spieler as s, Team as t WHERE t.verein_id = s.Vereins_ID;
 
 -- Import of erzielt_tore
-INSERT INTO erzielt_tore 
+INSERT INTO erzielt_tore(spieler_id, saison_id, anzahl) 
 	SELECT s.Spieler_ID as spieler_id, t.saison_id as saison_id, s.Tore as anzahl
 		FROM temp.Spieler as s, Team as t WHERE t.verein_id = s.Vereins_ID;
