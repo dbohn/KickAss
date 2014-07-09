@@ -1,0 +1,1162 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrartcl
+\begin_preamble
+\usepackage{txfonts}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks,
+pdfpagelabels,
+pdfstartview = FitH,
+bookmarksopen = true,
+bookmarksnumbered = true,
+linkcolor = black,
+plainpages = false,
+hypertexnames = false,
+citecolor = black] {hyperref}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language ngerman
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\topmargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language polish
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subject
+
+\series bold
+Freie Universität Berlin, Institut für Informatik
+\begin_inset Newline newline
+\end_inset
+
+Datenbanksysteme
+\begin_inset Newline newline
+\end_inset
+
+Sommersemester 2014
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\size largest
+Dokumentation des Arbeitsablaufs
+\size default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename Logo.eps
+	scale 40
+
+\end_inset
+
+ 
+\size normal
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+
+\size giant
+\begin_inset Graphics
+	filename Kickass.eps
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+\size large
+Mitglieder
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+\size default
+
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+David Bohn 
+\begin_inset Formula $\quad$
+\end_inset
+
+
+\begin_inset Formula $\quad$
+\end_inset
+
+ Fabian Reimeier 
+\begin_inset Formula $\quad$
+\end_inset
+
+
+\begin_inset Formula $\quad$
+\end_inset
+
+ Luca Keidel
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\family typewriter
+\size large
+https://github.com/dbohn/KickAss
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Entwicklung des Schemas
+\end_layout
+
+\begin_layout Subsection
+Grundkonzept
+\end_layout
+
+\begin_layout Standard
+Unser erstes Konzept bestand hauptsächlich aus den Entitäten 
+\begin_inset Formula $\texttt{Verein}$
+\end_inset
+
+, 
+\begin_inset Formula $\texttt{Spieler}$
+\end_inset
+
+, 
+\begin_inset Formula $\texttt{Spiel}$
+\end_inset
+
+ und 
+\begin_inset Formula $\texttt{Liga}$
+\end_inset
+
+.
+ Da wir zu diesem Zeitpunkt noch keine Informationen über die Daten hatten,
+ die wir zu Verfügung haben würden, haben wir den Entitäten alle grundlegenden
+ und uns wichtig erscheinenden Attribute zugeordnet.
+ Somit haben wir zunächst folgende Entitäten konstruiert:
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Verein: 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename verein.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Spieler:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename spieler.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Spiel:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename spiel.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Liga:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename liga.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wir haben des Weiteren angenommen, dass in einem Verein mindestens ein Spieler
+ Mitglied sein muss und ein Spieler bei genau einem Verein spielt.
+ Der Verein spielt in einer bestimmten Liga, in der mehrere Spiele stattfinden.
+ Ein Verein kann in diesen Spielen entweder Gast oder Gastgeber sein und
+ seine Spieler können während der Spiele eine bestimmte Anzahl an Toren
+ erzielen.
+ Daraus ergaben sich folgende Relationen mit Kardinalitäten in umgekehrter
+ Chen-Notation.
+ Die Attribute der Entitäten werden aus Übersichtlichkeitsgründen nicht
+ gezeigt.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation1.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Einführung von Saison
+\end_layout
+
+\begin_layout Standard
+Da unsere Anwendung saisonspezifische Antworten geben soll, mussten wir
+ unsere Entität 
+\begin_inset Formula $\texttt{Spiel}$
+\end_inset
+
+ und einige unserer Relationen um 
+\begin_inset Formula $\texttt{saison}$
+\end_inset
+
+- Attribute erweitern.
+ So kann ein Spieler in unterschiedlichen Saisons bei unterschiedlichen
+ Vereinen spielen und ein Verein in unterschiedlichen Ligen (schließlich
+ ist es möglich, dass Vereine ab- oder aufsteigen).
+ Desweiteren haben wir eine Änderung an der 
+\begin_inset Formula $\texttt{schiesst-tor}$
+\end_inset
+
+ Relation vorgenommen.
+ Da wir die Anzahl der Tore eines Spielers auch durch die Anzahl der Einträge
+ in der Relation bestimmen können, brauchen wir dieses Attribut nicht.
+ Wir ersetzen es aber mit dem Attribut 
+\begin_inset Formula $\texttt{spielminute}$
+\end_inset
+
+.
+ Da ein Spieler in einem Spiel mehrere Tore schießen kann, ist die 
+\begin_inset Formula $\texttt{spielminute}$
+\end_inset
+
+ ein Teilschlüssel.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename spiel2.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation1-1-1.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation1-2-1.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation1-6-1.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Offensichtlich offenbart sich aber hier schon ein Problem: Das Speichern
+ der Saison als Attribut führt zu Redundanz.
+ Dies beheben wir, indem wir die Saison als eine neue Entität auslagern.
+\end_layout
+
+\begin_layout Subsection
+Einführung von Teams und Saison als Entität
+\end_layout
+
+\begin_layout Standard
+Die Modellierung von Saisons als dedizierte Entität würde zu einer Relation
+ zwischen drei Entitäten führen (Spieler spielen während einer Saison bei
+ einer Mannschaft).
+ Aus diesem Grund haben wir noch eine weitere Entität eingeführt, 
+\begin_inset Formula $\texttt{Team}$
+\end_inset
+
+.
+ Ein Team besteht aus mindestens 11 Spielern.
+ Des Weiteren haben wir die Entität 
+\begin_inset Formula $\texttt{Verein}$
+\end_inset
+
+ um die Attribute 
+\begin_inset Formula $\texttt{ort}$
+\end_inset
+
+ und 
+\begin_inset Formula $\texttt{heimatstadion}$
+\end_inset
+
+ erweitert.
+ Für die Saison haben wir eine eigene Entität mit den Attributen 
+\begin_inset Formula $\texttt{\underline{id}}$
+\end_inset
+
+, 
+\begin_inset Formula $\texttt{start\_datum}$
+\end_inset
+
+, 
+\begin_inset Formula $\texttt{end\_datum}$
+\end_inset
+
+ und 
+\begin_inset Formula $\texttt{turnus}$
+\end_inset
+
+ hinzugefügt, um mehr Aussagen treffen zu können.
+ Die zuvor eingefügten 
+\begin_inset Formula $\texttt{saison}$
+\end_inset
+
+-Attribute haben wir wieder entfernt.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ein Spieler spielt nun also bei einem Team, welches wiederum während einer
+ bestimmten Saison in einer bestimmten Liga für einen bestimmten Verein
+ spielt.
+ Da Spieler in unterschiedlichen Teams eines Vereins die gleiche Trikotnummer
+ tragen können, verschieben wir das Attribut 
+\begin_inset Formula $\texttt{trikotnr}$
+\end_inset
+
+ zur Relation 
+\begin_inset Formula $\texttt{spielt-bei}$
+\end_inset
+
+ , wo es einen Teilschlüssel darstellt.
+ Außerdem finden alle Spiele finden in einer bestimmten Saison statt:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename team.eps
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename saison2.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation2-1.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation2-2.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation2-3.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation2-4.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation2-5.eps
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Eigentore
+\end_layout
+
+\begin_layout Standard
+Im bisherigen Model war es nicht möglich Eigentore darzustellen.
+ Deswegen haben wir der Relation 
+\begin_inset Formula $\texttt{erzielt-tor}$
+\end_inset
+
+ ein Attribut 
+\begin_inset Formula $\texttt{eigentor}$
+\end_inset
+
+ gegeben.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation3.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Anpassung an die Bundesliga Datenbank der Universität Bayreuth
+\end_layout
+
+\begin_layout Standard
+Die Uni Bayreuth bietet eine Datenbank mit folgendem Relationsschema:
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Verein(
+\bar under
+V_ID: int
+\bar default
+, Name: varchar, 
+\begin_inset Formula $\overline{\text{Liga: int}}$
+\end_inset
+
+)
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Spiel(
+\bar under
+Spiel_ID: int
+\bar default
+, Spieltag: int, Datum: date, Uhrzeit: time, 
+\begin_inset Formula $\overline{\text{Heim: int}}$
+\end_inset
+
+, 
+\begin_inset Formula $\overline{\text{Gast: int}}$
+\end_inset
+
+, Tore_Heim: int, Tore_Gast: int)
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Spieler(
+\bar under
+Spieler_ID: int
+\bar default
+, 
+\begin_inset Formula $\overline{\text{Vereins\_ID: int}}$
+\end_inset
+
+, Trikot_Nr: int, Tore: int, Spieler_Name: varchar, Land: varchar, Spiele:
+ int, Tore: int, Vorlage: int)
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Liga(
+\bar under
+Liga_Nr: int
+\bar default
+, Verband: varchar, Erstaustragung: date, 
+\begin_inset Formula $\overline{\text{Meister: int}}$
+\end_inset
+
+, Rekordspieler: varchar, Spiele_Rekordspieler: int)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Quelle: http://dbup2date.uni-bayreuth.de/bundesliga.html
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da wir bisher noch keine genaue Informationen zu den Daten, die unsere Anwendung
+ als Grundlage nutzen sollte, besaßen, mussten wir unser Schema deshalb
+ an die konkrete Struktur anpassen.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Probleme:
+\end_layout
+
+\begin_layout Itemize
+fehlende Informationen in unserem ER-Diagramm:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Spieltage
+\end_layout
+
+\begin_layout Itemize
+Heimtore/Gasttore als Attribut
+\end_layout
+
+\begin_layout Itemize
+Vorlage (nicht benötigt)
+\end_layout
+
+\begin_layout Itemize
+Verband (nicht benötigt)
+\end_layout
+
+\begin_layout Itemize
+Uhrzeit (nicht benötigt)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+mit den Daten der Datenbank nicht darstellbar:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Turnus
+\end_layout
+
+\begin_layout Itemize
+Eigentore
+\end_layout
+
+\begin_layout Itemize
+Vorname getrennt vom Nachnamen eines Spielers
+\end_layout
+
+\begin_layout Itemize
+Tore eines Spielers pro Spiel 
+\end_layout
+
+\begin_layout Itemize
+Spielminute der Tore
+\end_layout
+
+\begin_layout Itemize
+Spieldauer
+\end_layout
+
+\begin_layout Itemize
+mehrere Teams pro Verein (nur ein Team pro Verein gegeben)
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Wir haben zunächst der Entität 
+\begin_inset Formula $\texttt{Spiel}$
+\end_inset
+
+ alle fehlenden Attribute gegeben.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename spiel3.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um den Spieltag darzustellen haben wir das Attribut 
+\begin_inset Formula $\texttt{spieltag}$
+\end_inset
+
+ an die Relation 
+\begin_inset Formula $\texttt{findet-statt}$
+\end_inset
+
+ gehängt.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation4-1.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da die Datenbank nur Daten über die Toranzahl eines Spielers pro Saison
+ bietet, nicht aber pro Spiel, konnten wir die Relation 
+\begin_inset Formula $\texttt{erzielt-tor}$
+\end_inset
+
+ mit ihrem Attribut 
+\begin_inset Formula $\texttt{eigentor}$
+\end_inset
+
+ löschen und durch folgende ersetzen.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation4-2.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Attribut 
+\begin_inset Formula $\texttt{vorname}$
+\end_inset
+
+ der Entität 
+\begin_inset Formula $\texttt{Spieler}$
+\end_inset
+
+ genauso wie das 
+\begin_inset Formula $\texttt{turnus}$
+\end_inset
+
+ Attribut der 
+\begin_inset Formula $\texttt{Saison}$
+\end_inset
+
+ wurde gelöscht.
+\end_layout
+
+\begin_layout Subsection
+Unterstützung mehrerer Saisons
+\end_layout
+
+\begin_layout Standard
+Um mehrere Saisons zu unterstützen haben wir die 
+\begin_inset Formula $\texttt{gehört-zu}$
+\end_inset
+
+ Relation in 
+\begin_inset Formula $\texttt{findet-statt-in}$
+\end_inset
+
+ umbenannt und eine neue Relation 
+\begin_inset Formula $\texttt{gehoert-zu}$
+\end_inset
+
+ zwischen 
+\begin_inset Formula $\texttt{Liga}$
+\end_inset
+
+ und 
+\begin_inset Formula $\texttt{Saison}$
+\end_inset
+
+ eingefügt.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation5-1.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename relation5-2.eps
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Implementierung
+\end_layout
+
+\begin_layout Subsection
+Technik
+\end_layout
+
+\begin_layout Standard
+Wir haben uns für die Verwendung von PHP für den primären Datenbankzugriff
+ entschieden.
+ Als Datenbank kommt PostgreSQL zum Einsatz.
+ Für die Weboberfläche verwenden wir (neben den offensichtlichen Technologien
+ wie HTML und CSS) AngularJS.
+ Für den Zugriff auf die Datenbank in PHP verwenden wir 
+\emph on
+PHP Data Objects
+\emph default
+ (PDO), die vereinfacht ausgedrückt den eigentlichen Treiber für die Datenbank
+ kapseln und eine einheitliche Schnittstelle für verschiedene DBMS bieten.
+ Außerdem bietet PDO noch die Möglichkeit Prepared Statements zu verwenden.
+\end_layout
+
+\begin_layout Subsection
+Architektur
+\end_layout
+
+\begin_layout Standard
+Wir haben uns für eine strikte Trennung von Weboberfläche und Zugriff auf
+ die Datenbank entschieden.
+ Konkret bedeutet dies, dass wir die Queries und die ganze Programmlogik
+ zum Datenbankzugriff hinter einer API (Application Programming Interface)
+ verborgen haben.
+ Bei der API handelt es sich um eine REST-API, die die Daten im JSON-Format
+ zurückliefert.
+ Die Weboberfläche verwendet diese API und ruft die benötigten Datein mittels
+ AJAX-Requests ab.
+ Für eine genauere Dokumentation verweisen wir an dieser Stelle auf die
+ Dokumentation der API oder unsere allgemeine technische Dokumentation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Anhang
+\end_layout
+
+\begin_layout Subsection
+Grundkonzept
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename er-diagramm-1.eps
+	scale 50
+	rotateAngle 270
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Einführung von Teams und Saison als Entität
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename er-diagramm-2.eps
+	scale 40
+	rotateAngle 270
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Eigentore
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename er-diagramm-3.eps
+	scale 80
+	rotateAngle 270
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Anpassung an die Bundesliga Datenbank der Universität Bayreuth
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename er-diagramm-4.eps
+	scale 40
+	rotateAngle 270
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Unterstützung mehrerer Saisons
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename er-diagramm-5.eps
+	scale 35
+	rotateAngle 270
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
